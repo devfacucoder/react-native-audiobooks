@@ -19,7 +19,7 @@ function Home() {
       <TouchableOpacity
         style={{
           marginTop: 20,
-          width: 100,
+          width: 120,
 
           height: 40,
           backgroundColor: "#8c2a2aff",
@@ -30,19 +30,18 @@ function Home() {
           await AsyncStorage.clear();
         }}
       >
-        <Text style={{ textAlign: "center", color: "#fff" }}>ahre</Text>
+        <Text style={{ textAlign: "center", color: "#fff" }}>Borrar Cache</Text>
       </TouchableOpacity>
       <View style={styles.cardContainer}>
-        {dataCadaLibro.map((libro) => (
+        {dataCadaLibro.map((libro, index) => (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Libro");
+              navigation.navigate("Libro", { libro: libro });
             }}
           >
             <CardLibro
               pUrlImage={`https://${libro.domini}${libro.dir}/${libro.png}`}
               pTitle={libro.title}
-              key={libro.identifier}
             />
           </TouchableOpacity>
         ))}
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 10,
-    backgroundColor:"#121212",
+    backgroundColor: "#121212",
   },
   cardContainer: {
     flexDirection: "row",
