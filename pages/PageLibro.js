@@ -12,8 +12,9 @@ import { useNavigation } from "@react-navigation/native";
 
 function PageLibro({ route }) {
   const { libro } = route.params;
+  console.log(libro)
   const navigation = useNavigation();
-
+  console.log("Libro data:", libro);
   return (
     <ScrollView style={styles.container}>
       {/* IMAGEN */}
@@ -41,11 +42,17 @@ function PageLibro({ route }) {
             <TouchableOpacity
               onPress={() => {
                 // Handle navigation or other actions if needed
-                navigation.navigate("PlayAudio", { audio });
+                navigation.navigate("PlayAudio", {
+                  png: libro.png,
+                  domini: libro.domini,
+                  dir: libro.dir,
+                  audio: audio,
+                });
               }}
             >
               <ItemPlayAudio
-                title={audio.title}
+                pLibro={libro}
+                pTitle={audio.title}
                 url={`https://${libro.domini}${libro.dir}/${audio.file}`}
               />
             </TouchableOpacity>

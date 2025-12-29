@@ -10,10 +10,17 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import CardLibro from "../components/layout/CardLibro";
+import BtnPagination from "../components/layout/BtnPagination";
 function Home() {
-  const { dataCadaLibro } = useGetLibros();
   const [libros, setLibros] = useState([]);
+  const [pageActual, setPageActual] = useState(1);
+  const { dataCadaLibro } = useGetLibros(pageActual);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    console.log("Página actual:", pageActual);
+  }, [pageActual]);
+
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity
@@ -46,6 +53,7 @@ function Home() {
           </TouchableOpacity>
         ))}
       </View>
+      <BtnPagination pageActual={pageActual} setPageActual={setPageActual} />
     </ScrollView>
   );
 }

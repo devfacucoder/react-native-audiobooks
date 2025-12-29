@@ -10,8 +10,10 @@ async function getLibroData(identifier, title, creator, description) {
     const domini = data.d1;
 
     const dataFiles = data.files;
-    const mp3 = dataFiles.filter((audio) => audio.format === "VBR MP3");
 
+    const mp3 = dataFiles.filter(
+      (audio) => audio.format === "VBR MP3" || audio.format === "64Kbps MP3"
+    );
     return {
       mp3,
       png: "__ia_thumb.jpg",
